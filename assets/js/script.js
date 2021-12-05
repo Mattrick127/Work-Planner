@@ -17,15 +17,19 @@ $(".row").on("click", "textarea", function() {
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
 });
+
 var saveLocalStorage = function () {
     var textArea1 = textArea.value
     console.log(textArea.value)
     localStorage.setItem("1", textArea1)
 }
 
-// $(".saveBtn").on("click", function() {
-//     const list_task = $(this).prev();
-//     console.log(list_task.find("textarea").val());
-//     localStorage.setItem("1", list_task);
-// });
+$(".saveBtn").on("click", function() {
+    const list_task = $(this).prev();
+    const textAreaIndex = list_task.data('hour');
+    localStorage.setItem(textAreaIndex, list_task.val());
+    //.,getItem(1)
+    //compare the above with the current hour (use momentum to get the current hour)
+    //if equal to current hour, apply current hour css to task
+});
 buttons.addEventListener("click", saveLocalStorage)
