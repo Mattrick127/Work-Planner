@@ -6,8 +6,7 @@ var buttons = document.querySelector(".saveBtn")
 var setHour = today.getHours
 const rows = document.getElementsByClassName(".row");
 
-$(".row").on("click", "textarea", function() {
-    console.log("textarea was clicked");
+$(".saveBtn").on("click", "textarea", function() {
     console.log(rows)
     var text = $(this)
         .text()
@@ -16,20 +15,26 @@ $(".row").on("click", "textarea", function() {
         .val(text);
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
+    localStorage.setItem("1", textInput)
 });
 
 var saveLocalStorage = function () {
     var textArea1 = textArea.value
-    console.log(textArea.value)
+    console.log(textArea1)
     localStorage.setItem("1", textArea1)
 }
 
-$(".saveBtn").on("click", function() {
-    const list_task = $(this).prev();
-    const textAreaIndex = list_task.data('hour');
-    localStorage.setItem(textAreaIndex, list_task.val());
+var loadLocalStorage = function () {
+    var loadTextInput = localStorage.getItem("1");
+    $(".description1").text(loadTextInput)
+}
+// $(".saveBtn").on("click", function() {
+//     const list_task = $(this).prev();
+//     const textAreaIndex = list_task.data('hour');
+//     localStorage.setItem(textAreaIndex, list_task.val());
     //.,getItem(1)
     //compare the above with the current hour (use momentum to get the current hour)
     //if equal to current hour, apply current hour css to task
-});
+// });
 buttons.addEventListener("click", saveLocalStorage)
+loadLocalStorage();
